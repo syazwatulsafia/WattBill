@@ -68,11 +68,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 Bill bill = new Bill();
                 bill.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+
                 bill.setMonth(cursor.getString(cursor.getColumnIndex(COLUMN_MONTH)));
+
                 bill.setUnits(cursor.getDouble(cursor.getColumnIndex(COLUMN_UNITS)));
+
                 bill.setRebate(cursor.getDouble(cursor.getColumnIndex(COLUMN_REBATE)));
 
+
                 bill.setTotalCharges(cursor.getDouble(cursor.getColumnIndex(COLUMN_TOTAL_CHARGES)));
+
 
                 bill.setFinalCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_FINAL_COST)));
 
@@ -104,10 +109,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         bill.setUnits(cursor.getDouble(cursor.getColumnIndex(COLUMN_UNITS)));
         bill.setRebate(cursor.getDouble(cursor.getColumnIndex(COLUMN_REBATE)));
 
+
         bill.setTotalCharges(cursor.getDouble(cursor.getColumnIndex(COLUMN_TOTAL_CHARGES)));
+
         bill.setFinalCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_FINAL_COST)));
 
         cursor.close();
         return bill;
     }
+
+    public int updateBill(Bill bill) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_MONTH, bill.getMonth());
+        values.put(COLUMN_UNITS, bill.getUnits());
+        values.put(COLUMN_REBATE, bill.getRebate());
+        values.put(COLUMN_TOTAL_CHARGES, bill.getTotalCharges());
+        values.put(COLUMN_FINAL_COST, bill.getFinalCost());
+
+        int rows = db.update(TABLE_BILLS, values,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(bill.getId())});
+
+        db.close();
+        return rows;
+    }
+
+    public void deleteBill(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BILLS, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+
 }

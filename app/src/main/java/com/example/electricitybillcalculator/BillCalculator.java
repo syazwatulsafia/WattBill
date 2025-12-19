@@ -7,7 +7,8 @@ public class BillCalculator {
     private static final double RATE_3 = 0.516;
     private static final double RATE_4 = 0.546;
 
-    public static BillCalculationResult calculateBill(double units, double rebatePercentage) {
+    public static BillCalculationResult calculateBill(double units, double
+            rebatePercentage) {
 
         double totalCharges = calculateTariff(units);
 
@@ -55,7 +56,8 @@ public class BillCalculator {
         public double finalCost;
         public double rebateAmount;
 
-        public BillCalculationResult(double totalCharges, double finalCost, double rebateAmount) {
+        public BillCalculationResult(double totalCharges, double finalCost,
+                                     double rebateAmount) {
             this.totalCharges = totalCharges;
             this.finalCost = finalCost;
             this.rebateAmount = rebateAmount;

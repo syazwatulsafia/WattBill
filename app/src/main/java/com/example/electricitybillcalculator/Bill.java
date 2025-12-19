@@ -12,7 +12,8 @@ public class Bill implements Serializable {
 
     public Bill() {}
 
-    public Bill(String month, double units, double rebate, double totalCharges, double finalCost) {
+    public Bill(String month, double units, double rebate, double totalCharges,
+                double finalCost) {
         this.month = month;
         this.units = units;
         this.rebate = rebate;

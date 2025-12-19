@@ -35,15 +35,18 @@ public class BillListActivity extends AppCompatActivity {
         listViewBills = findViewById(R.id.listViewBills);
         textViewEmpty = findViewById(R.id.textViewEmpty);
 
-        listViewBills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bill bill = billList.get(position);
-                Intent intent = new Intent(BillListActivity.this, BillDetailActivity.class);
-                intent.putExtra("BILL_ID", bill.getId());
-                startActivity(intent);
-            }
-        });
+        listViewBills.setOnItemClickListener(new
+                                                     AdapterView.OnItemClickListener() {
+                                                         @Override
+                                                         public void onItemClick(AdapterView<?> parent, View view, int
+                                                                 position, long id) {
+                                                             Bill bill = billList.get(position);
+                                                             Intent intent = new Intent(BillListActivity.this,
+                                                                     BillDetailActivity.class);
+                                                             intent.putExtra("BILL_ID", bill.getId());
+                                                             startActivity(intent);
+                                                         }
+                                                     });
     }
 
     private void loadBills() {
@@ -62,7 +65,8 @@ public class BillListActivity extends AppCompatActivity {
             String[] billData = new String[billList.size()];
             for (int i = 0; i < billList.size(); i++) {
                 Bill bill = billList.get(i);
-                billData[i] = bill.getMonth() + " - RM " + String.format("%.2f", bill.getFinalCost());
+                billData[i] = bill.getMonth() + " - RM " + String.format("%.2f",
+                        bill.getFinalCost());
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

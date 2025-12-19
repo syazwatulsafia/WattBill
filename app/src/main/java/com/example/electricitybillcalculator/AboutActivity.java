@@ -22,7 +22,8 @@ public class AboutActivity extends AppCompatActivity {
         textViewWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://github.com/syazwatulsafia/ElectricityBillCalculator";
+                String url =
+                        "https://github.com/syazwatulsafia/WattBill";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);

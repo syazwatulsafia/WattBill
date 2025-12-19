@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="Electricity Bill Calculator"
+            android:text="WattBill"
             android:textColor="#333"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="Student Information"
+                android:text="Student's Information"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -79,13 +79,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Class: CDCS2405B"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="Course Code: ICT602"
                 android:textSize="16sp" />
 
@@ -95,14 +88,6 @@
                 android:layout_marginBottom="8dp"
                 android:text="Course Name: Mobile Technology and Development"
                 android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Lecturer Name: Dr. Ahmad Iqbal Hakim b. Suhaimi"
-                android:textSize="16sp" />
-
 
             <!-- Clickable Website -->
             <TextView
@@ -120,13 +105,128 @@
 
         </LinearLayout>
 
+        <!-- App Info -->
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="User Guide"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="1. Select the month from the dropdown (Jan –
+Dec)."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="2. Enter the total electricity units (kWh)
+consumed for the selected month."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="3. Enter a rebate percentage value between 0% to
+5%."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="4. Tap the Calculate Bill button to see total
+charges (before rebate)
+and final cost (after rebate)"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="5. Tap Save Bill to store the bill details in the
+local database."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="6. Go to View Saved Bills to see a list of all
+saved bills.Tap any item to view detailed breakdown."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="7. On the Bill Details page, tap the Edit button to modify the entered data before. After editing, click Calculate Bill button then tap Update Bill to save the changes."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="8. To remove a saved bill, tap the Delete button on the Bill Details page. A confirmation message will appear before the bill is permanently deleted."
+                android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="Important Notes"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="• Ensure all fields are filled before
+calculating."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="• Rebate must be between 0–5%."
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="• Bills are saved locally and can be viewed
+anytime offline."
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
         <!-- Copyright -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="© 2025 Electricity Bill Calculator. All rights reserved."
+            android:text="© 2025 WattBill. All rights
+reserved."
             android:textColor="#666"
             android:textSize="14sp" />
 

@@ -220,7 +220,6 @@
             android:text="View Saved Bills"
             android:textColor="#fff" />
     </LinearLayout>
-
     <!-- About Buttons -->
     <Button
         android:id="@+id/buttonAbout"

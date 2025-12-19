@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     private double totalCharges = 0;
     private double finalCost = 0;
+    private boolean isEditMode = false;
+    private int editBillId = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +33,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set custom title and colors
-        getSupportActionBar().setTitle("Electricity Bill Calculator");
+        getSupportActionBar().setTitle(R.string.app_name);
         getWindow().setStatusBarColor(Color.parseColor("#2196F3"));
 
         initializeViews();
         setupSpinner();
         dbHelper = new DatabaseHelper(this);
+
+        Intent intent = getIntent();
+        if (intent != null && intent.getBooleanExtra("EDIT_BILL", false)) {
+            isEditMode = true;
+            editBillId = intent.getIntExtra("BILL_ID", -1);
+            loadBillForEdit(editBillId);
+        }
 
         buttonCalculate.setOnClickListener(v -> calculateBill());
         buttonSave.setOnClickListener(v -> saveBill());
@@ -57,10 +67,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupSpinner() {
-        String[] months = {"Select Month", "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"};
+        String[] months = {"Select Month", "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September", "October", "November",
+                "December"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, months);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(adapter);
     }
@@ -78,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
         totalCharges = result.totalCharges;
         finalCost = result.finalCost;
 
-        textViewTotalCharges.setText("RM " + String.format("%.2f",totalCharges));
+        textViewTotalCharges.setText("RM " +
+                String.format("%.2f",totalCharges));
         textViewRebate.setText(String.format("%.1f%%", rebate));
         textViewFinalCost.setText("RM " + String.format("%.2f", finalCost));
 
@@ -137,6 +151,22 @@ public class MainActivity extends AppCompatActivity {
         double units = Double.parseDouble(editTextUnits.getText().toString());
         double rebate = getSelectedRebate();
 
+        // ✅ EDIT MODE
+        if (isEditMode) {
+            Bill bill = new Bill(month, units, rebate, totalCharges, finalCost);
+            bill.setId(editBillId);
+
+            int rows = dbHelper.updateBill(bill);
+            if (rows > 0) {
+                Toast.makeText(this, "Bill updated successfully", Toast.LENGTH_SHORT).show();
+                finish(); // go back to bill list
+            } else {
+                showError("Failed to update bill");
+            }
+            return;
+        }
+
+        // ✅ SAVE MODE
         Bill bill = new Bill(month, units, rebate, totalCharges, finalCost);
         long id = dbHelper.addBill(bill);
 
@@ -147,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
             showError("Failed to save bill");
         }
     }
+
 
     private void resetForm() {
         spinnerMonth.setSelection(0);
@@ -172,6 +203,39 @@ public class MainActivity extends AppCompatActivity {
 
     private void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadBillForEdit(int billId) {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        Bill bill = dbHelper.getBill(billId);
+
+        // Set month
+        ArrayAdapter adapter = (ArrayAdapter) spinnerMonth.getAdapter();
+        int position = adapter.getPosition(bill.getMonth());
+        spinnerMonth.setSelection(position);
+
+        editTextUnits.setText(String.valueOf(bill.getUnits()));
+
+        // Rebate
+        int rebate = (int) bill.getRebate();
+        radioGroupRebate.check(getRebateRadioId(rebate));
+
+        textViewTotalCharges.setText("RM " + String.format("%.2f", bill.getTotalCharges()));
+        textViewFinalCost.setText("RM " + String.format("%.2f", bill.getFinalCost()));
+
+        buttonSave.setText("Update Bill");
+        buttonSave.setEnabled(true);
+    }
+
+    private int getRebateRadioId(int rebate) {
+        switch (rebate) {
+            case 1: return R.id.radioRebate1;
+            case 2: return R.id.radioRebate2;
+            case 3: return R.id.radioRebate3;
+            case 4: return R.id.radioRebate4;
+            case 5: return R.id.radioRebate5;
+            default: return R.id.radioRebate0;
+        }
     }
 
 }
